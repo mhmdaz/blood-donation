@@ -12,6 +12,7 @@
 
         <!-- Styles -->
         <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.11.1/css/jquery.dataTables.min.css">
 
         <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}" defer></script>
@@ -32,5 +33,9 @@
                 {{ $slot }}
             </main>
         </div>
+
+        <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+        <script src="https://cdn.datatables.net/1.11.1/js/jquery.dataTables.min.js"></script>
+        @stack('datatable-scripts')
     </body>
 </html>
