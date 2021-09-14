@@ -7,6 +7,7 @@ use App\Models\State;
 use App\Models\District;
 use App\Models\BloodGroup;
 use Illuminate\Http\Request;
+use App\Http\Requests\StoreDonorRequest;
 
 class DonorController extends Controller
 {
@@ -64,9 +65,11 @@ class DonorController extends Controller
         return view('donors.create', compact('states', 'districts', 'blood_groups'));
     }
 
-    public function store()
+    public function store(StoreDonorRequest $request)
     {
-        dd('store');
+        Donor::create($request->all());
+
+        return redirect(route('donors.index'));
     }
 
     public function edit()
