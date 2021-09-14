@@ -19,6 +19,7 @@ class CreateDonorsTable extends Migration
             $table->string('name')->nullable();
             $table->string('phone')->nullable();
             $table->string('email')->nullable();
+            $table->integer('blood_group_id')->nullable();
             $table->integer('district_id')->nullable();
             $table->integer('state_id')->nullable();
             $table->string('status')->nullable();               // active, inactive

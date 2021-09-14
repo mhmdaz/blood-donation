@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Donor;
 use App\Models\District;
+use App\Models\BloodGroup;
 use Illuminate\Http\Request;
 
 class DonorController extends Controller
@@ -51,7 +52,9 @@ class DonorController extends Controller
     {
         $districts = District::all()->pluck('name', 'id');
 
-        return view('donors.create', compact('districts'));
+        $blood_groups = BloodGroup::all()->pluck('name', 'id');
+
+        return view('donors.create', compact('districts', 'blood_groups'));
     }
 
     public function store()

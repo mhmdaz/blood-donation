@@ -41,6 +41,17 @@
                                 <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" />
                             </div>
 
+                            <!-- Blood Group -->
+                            <div class="mt-4">
+                                <x-label for="blood_group_id" :value="__('Blood Group')" />
+
+                                <select id="blood_group_id" name="blood_group_id" class="block mt-1 w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" required autofocus>
+                                    @foreach($blood_groups as $id => $name)
+                                        <option value="{{ $id }}">{{ $name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+
                             <!-- District -->
                             <div class="mt-4">
                                 <x-label for="district_id" :value="__('District')" />
