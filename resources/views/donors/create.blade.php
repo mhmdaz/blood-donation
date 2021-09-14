@@ -52,6 +52,17 @@
                                 </select>
                             </div>
 
+                            <!-- State -->
+                            <div class="mt-4">
+                                <x-label for="state_id" :value="__('State')" />
+
+                                <select id="state_id" name="state_id" class="block mt-1 w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" required autofocus>
+                                    @foreach($states as $id => $name)
+                                        <option value="{{ $id }}">{{ $name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+
                             <!-- District -->
                             <div class="mt-4">
                                 <x-label for="district_id" :value="__('District')" />
@@ -61,6 +72,13 @@
                                         <option value="{{ $id }}">{{ $name }}</option>
                                     @endforeach
                                 </select>
+                            </div>
+
+                            <!-- Last Donated Date -->
+                            <div class="mt-4">
+                                <x-label for="last_donated_date" :value="__('Last Donated Date')" />
+
+                                <x-input id="last_donated_date" class="block mt-1 w-full" type="date" name="last_donated_date" :value="old('last_donated_date')" />
                             </div>
 
                             <div class="flex items-center justify-end mt-4">
