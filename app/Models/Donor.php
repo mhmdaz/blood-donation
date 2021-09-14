@@ -22,12 +22,12 @@ class Donor extends Model
 
     public function getDistrictNameAttribute()
     {
-        return $this->district->name;
+        return optional($this->district)->name;
     }
 
     public function getStateNameAttribute()
-    {
-        return $this->state->name;
+    {   
+        return optional($this->state)->name;
     }
 
     public function district()
