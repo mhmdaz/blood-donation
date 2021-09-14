@@ -3,6 +3,10 @@
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Donors') }}
         </h2>
+
+        <x-anchor-button href="{{ route('donors.create') }}">
+            {{ __('+ Add Donor') }}
+        </x-anchor-button>
     </x-slot>
 
     <div class="py-12">

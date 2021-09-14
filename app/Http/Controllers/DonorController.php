@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Donor;
+use App\Models\District;
 use Illuminate\Http\Request;
 
 class DonorController extends Controller
@@ -48,7 +49,9 @@ class DonorController extends Controller
 
     public function create()
     {
-        dd('create');
+        $districts = District::all()->pluck('name', 'id');
+
+        return view('donors.create', compact('districts'));
     }
 
     public function store()
