@@ -1,7 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DonorController;
+use App\Http\Controllers\DonorDatatable;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,6 +25,6 @@ Route::get('/dashboard', function () {
 
 require __DIR__.'/auth.php';
 
-Route::any('/donors/datatable/{status?}', [ DonorController::class, 'datatable' ])->name('donors.datatable');
+Route::any('/donors/datatable/{status?}', DonorDatatable::class)->name('donors.datatable');
 
 Route::resource('donors', DonorController::class);
