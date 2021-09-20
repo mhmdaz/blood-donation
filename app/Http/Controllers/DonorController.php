@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\Donor;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreDonorRequest;
@@ -13,9 +14,20 @@ class DonorController extends Controller
         return view('donors.index');
     }
 
-    public function datatable()
+    public function datatable($status = '')
     {
-        $donors = Donor::with('district', 'state');
+        $donors = Donor::leftJoin('blood_groups', 'blood_groups.id', '=', 'donors.blood_group_id')
+                        ->leftJoin('districts', 'districts.id', '=', 'donors.district_id')
+                        ->leftJoin('states', 'states.id', '=', 'donors.state_id')
+                        ->select('donors.*', 'blood_groups.name AS blood_group_name', 'districts.name AS district_name', 'states.name AS state_name');
+
+        if ('active' === $status) {
+            $donors = $donors->where('status', $status)
+                             ->where(function($query) {
+                                $query->whereDate('last_donated_date', '<', Carbon::now()->subMonth(3))
+                                      ->orWhereNull('last_donated_date');
+                             });
+        }
 
         return datatables($donors)
             ->addColumn('name', function ($obj) {

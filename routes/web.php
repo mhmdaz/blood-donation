@@ -24,5 +24,6 @@ Route::get('/dashboard', function () {
 
 require __DIR__.'/auth.php';
 
-Route::any('/donors/datatable', [ DonorController::class, 'datatable' ])->name('donors.datatable');
+Route::any('/donors/datatable/{status?}', [ DonorController::class, 'datatable' ])->name('donors.datatable');
+
 Route::resource('donors', DonorController::class);
