@@ -27,6 +27,9 @@ class DonorController extends Controller
             ->addColumn('email', function ($obj) {
                 return $obj->email;
             })
+            ->addColumn('blood_group', function ($obj) {
+                return $obj->blood_group_name;
+            })
             ->addColumn('district', function ($obj) {
                 return $obj->district_name;
             })
