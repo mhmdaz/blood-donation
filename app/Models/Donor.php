@@ -14,6 +14,7 @@ class Donor extends Model
         'name',
         'phone',
         'email',
+        'blood_group_id',
         'district_id',
         'state_id',
         'status',
