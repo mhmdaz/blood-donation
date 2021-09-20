@@ -39,6 +39,27 @@ class DonorController extends Controller
             ->addColumn('last_donated_date', function ($obj) {
                 return $obj->last_donated_date;
             })
+            ->filterColumn('name', function($query, $keyword) {
+                $query->where('donors.name', 'like', "%$keyword%");
+            })
+            ->filterColumn('phone', function($query, $keyword) {
+                $query->where('donors.phone', 'like', "%$keyword%");
+            })
+            ->filterColumn('email', function($query, $keyword) {
+                $query->where('donors.email', 'like', "%$keyword%");
+            })
+            ->filterColumn('blood_group', function($query, $keyword) {
+                $query->where('blood_groups.name', 'like', "%$keyword%");
+            })
+            ->filterColumn('district', function($query, $keyword) {
+                $query->where('districts.name', 'like', "%$keyword%");
+            })
+            ->filterColumn('state', function($query, $keyword) {
+                $query->where('states.name', 'like', "%$keyword%");
+            })
+            ->filterColumn('last_donated_date', function($query, $keyword) {
+                $query->where('donors.last_donated_date', 'like', "%$keyword%");
+            })
             ->toJson();
     }
 
