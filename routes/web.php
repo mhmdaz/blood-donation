@@ -19,6 +19,10 @@ Route::get('/', function () {
     return view('index');
 });
 
+Route::get('/donors/register', function () {
+    return view('donor-registration');
+})->name('donors.register');
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
