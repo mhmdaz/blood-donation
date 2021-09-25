@@ -1,6 +1,6 @@
 <div class="w-full sm:max-w-md mx-auto px-6 py-4 bg-white overflow-hidden">
     <h3 class="font-semibold text-xl text-gray-800 leading-tight mb-4">
-        {{ __('Add New Donor') }}
+        {{ __('Enter Donor Details') }}
     </h3>
 
     <!-- Validation Errors -->
