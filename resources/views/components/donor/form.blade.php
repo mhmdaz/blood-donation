@@ -11,14 +11,14 @@
 
         <!-- Name -->
         <div>
-            <x-label for="name" :value="__('Name')" />
+            <x-label class="required" for="name" :value="__('Name')" />
 
             <x-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus />
         </div>
 
         <!-- Phone Number -->
         <div class="mt-4">
-            <x-label for="phone" :value="__('Phone Number')" />
+            <x-label class="required" for="phone" :value="__('Phone Number')" />
 
             <x-input id="phone" class="block mt-1 w-full" type="text" name="phone" :value="old('phone')" required autofocus />
         </div>
@@ -32,7 +32,7 @@
 
         <!-- Blood Group -->
         <div class="mt-4">
-            <x-label for="blood_group_id" :value="__('Blood Group')" />
+            <x-label class="required" for="blood_group_id" :value="__('Blood Group')" />
 
             <select id="blood_group_id" name="blood_group_id" class="block mt-1 w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" required autofocus>
                 @foreach($blood_groups as $id => $name)
@@ -43,7 +43,7 @@
 
         <!-- State -->
         <div class="mt-4">
-            <x-label for="state_id" :value="__('State')" />
+            <x-label class="required" for="state_id" :value="__('State')" />
 
             <select id="state_id" name="state_id" class="block mt-1 w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" required autofocus>
                 @foreach($states as $id => $name)
@@ -54,7 +54,7 @@
 
         <!-- District -->
         <div class="mt-4">
-            <x-label for="district_id" :value="__('District')" />
+            <x-label class="required" for="district_id" :value="__('District')" />
 
             <select id="district_id" name="district_id" class="block mt-1 w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" required autofocus>
                 @foreach($districts as $id => $name)
