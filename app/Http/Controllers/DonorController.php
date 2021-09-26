@@ -50,8 +50,10 @@ class DonorController extends Controller
         return redirect(route('donors.index'));
     }
 
-    public function destroy()
+    public function destroy(Donor $donor)
     {
-        dd('destroy');
+        Donor::destroy($donor->id);
+
+        return redirect(route('donors.index'));
     }
 }

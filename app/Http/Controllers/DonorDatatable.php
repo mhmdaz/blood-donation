@@ -51,6 +51,14 @@ class DonorDatatable extends Controller
             ->addColumn('status', function ($obj) {
                 return $obj->status;
             })
+            ->addColumn('actions', function ($obj) {
+                return [
+                    'urls' => [
+                        'edit' => route('donors.edit', $obj->id),
+                        'delete' => (auth()->check() and auth()->user()->hasRole('super-admin')) ? route('donors.destroy', $obj->id) : null,
+                    ]
+                ];
+            })
             ->addColumn('last_donated_date', function ($obj) {
                 return $obj->last_donated_date;
             })

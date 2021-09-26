@@ -23,6 +23,7 @@
                                 <th>State</th>
                                 <th>Status</th>
                                 <th>Last Donated Date</th>
+                                <th>Actions</th>
                             </tr>
                         </thead>
 
@@ -35,6 +36,8 @@
 
     @push('datatable-scripts')
         <script type="text/javascript" defer>
+            let csrf_token = '{{ csrf_token() }}';
+
             $(document).ready(function () {
                 $('#donors_table').DataTable({
                     serverSide: true,
@@ -42,7 +45,7 @@
                         url: '/donors/datatable',
                         type: 'POST',
                         data: {
-                            _token: '{{ csrf_token() }}',
+                            _token: csrf_token,
                         },
                     },
                     columns: [
@@ -53,6 +56,30 @@
                         { data: 'state' },
                         { data: 'status' },
                         { data: 'last_donated_date' },
+                        {
+                            data: 'actions',
+                            render: function (data, type, row) {
+                                let html = `<div class="flex justify-center">
+                                                <a href="${data.urls.edit}">
+                                                    <img class="h-4 w-4" src="/assets/images/edit.svg" />
+                                                </a>`
+
+                                if (data.urls.delete) {
+                                    html += `<form method="POST" action="${data.urls.delete}" class="ml-2">
+                                                <input type="hidden" name="_method" value="DELETE">
+
+                                                <input type="hidden" name="_token" value="${csrf_token}">
+
+                                                <button type="submit">
+                                                    <img class="h-5 w-5" src="/assets/images/delete.svg" />
+                                                </button>
+                                            </form>`
+                                }
+
+                                html += `</div>`
+                                return html
+                            }
+                        },
                     ],
                 });
             });
