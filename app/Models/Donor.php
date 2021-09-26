@@ -28,7 +28,7 @@ class Donor extends Model
     }
 
     public function getStateNameAttribute()
-    {   
+    {
         return optional($this->state)->name;
     }
 
