@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\DonorController;
 use App\Http\Controllers\DonorDatatable;
+use App\Http\Controllers\UpdateDonatedDate;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,11 +18,17 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('index');
-});
+})->name('index');
 
 Route::get('/donors/register', function () {
     return view('donor-registration');
 })->name('donors.register');
+
+Route::get('/donors/donated-date', function () {
+    return view('edit-donated-date');
+})->name('donors.donated-date.edit');
+
+Route::put('/donors/donated-date', UpdateDonatedDate::class)->name('donors.donated-date.update');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
