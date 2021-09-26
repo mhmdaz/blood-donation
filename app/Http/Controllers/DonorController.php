@@ -11,6 +11,7 @@ class DonorController extends Controller
     public function __construct()
     {
         $this->middleware('auth')->except('store');
+        $this->middleware(['role:super-admin'], ['only' => ['delete']]);
     }
 
     public function index()

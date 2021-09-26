@@ -15,12 +15,16 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        foreach (config('seeding.users') as $key => $user) {
-            User::create(array_merge($user, [
-                'email_verified_at' => now(),
-                'password' => bcrypt('admin123'),
-                'remember_token' => Str::random(10),
-            ]));
+        foreach (config('seeding.users') as $role => $users) {
+            foreach($users as $user_details) {
+                $user = User::create(array_merge($user_details, [
+                    'email_verified_at' => now(),
+                    'password' => bcrypt('admin123'),
+                    'remember_token' => Str::random(10),
+                ]));
+
+                $user->assignRole($role);
+            }
         }
     }
 }
