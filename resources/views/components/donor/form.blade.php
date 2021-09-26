@@ -18,6 +18,13 @@
             <x-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name') ?? optional($donor ?? null)->name" placeholder="Aaron John" required autofocus />
         </div>
 
+        <!-- Date of Birth -->
+        <div class="mt-4">
+            <x-label for="date_of_birth" :value="__('Date of Birth')" />
+
+            <x-input id="date_of_birth" class="block mt-1 w-full" type="date" name="date_of_birth" :value="old('date_of_birth') ?? optional($donor ?? null)->date_of_birth" />
+        </div>
+
         <!-- Phone Number -->
         <div class="mt-4">
             <x-label class="required" for="phone" :value="__('Phone Number')" />

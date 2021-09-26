@@ -29,6 +29,11 @@ class DonorRequest extends FormRequest
                 'required',
                 'string',
             ],
+            'date_of_birth' => [
+                'nullable',
+                'date_format:Y-m-d',
+                'before_or_equal:today',
+            ],
             'phone' => [
                 'required',
                 'string',

@@ -16,6 +16,7 @@ class CreateDonorsTable extends Migration
         Schema::create('donors', function (Blueprint $table) {
             $table->id();
             $table->integer('user_id')->nullable();
+            $table->date('date_of_birth')->nullable();
             $table->string('name')->nullable();
             $table->string('phone')->nullable();
             $table->string('email')->nullable();
