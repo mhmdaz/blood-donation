@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Donor;
 use Illuminate\Http\Request;
-use App\Http\Requests\StoreDonorRequest;
+use App\Http\Requests\DonorRequest;
 
 class DonorController extends Controller
 {
@@ -29,7 +29,7 @@ class DonorController extends Controller
         return view('donors.form');
     }
 
-    public function store(StoreDonorRequest $request)
+    public function store(DonorRequest $request)
     {
         Donor::create($request->all());
 
@@ -43,9 +43,11 @@ class DonorController extends Controller
         ]);
     }
 
-    public function update()
+    public function update(DonorRequest $request, Donor $donor)
     {
-        dd('update');
+        $donor->update($request->all());
+
+        return redirect(route('donors.index'));
     }
 
     public function destroy()

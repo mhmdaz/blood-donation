@@ -2,10 +2,10 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
-class StoreDonorRequest extends FormRequest
+class DonorRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -34,12 +34,16 @@ class StoreDonorRequest extends FormRequest
                 'string',
                 'regex:/[0-9]{10}/',
                 'digits:10',
-                'unique:donors',
+                ($this->route('donor') ?? false) 
+                    ? Rule::unique('donors')->ignore($this->route('donor'))
+                    : 'unique:donors',
             ],
             'email' => [
                 'nullable',
                 'email',
-                'unique:donors',
+                ($this->route('donor') ?? false) 
+                    ? Rule::unique('donors')->ignore($this->route('donor'))
+                    : 'unique:donors',
             ],
             'blood_group_id' => [
                 'required',
