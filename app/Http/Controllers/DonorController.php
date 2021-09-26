@@ -26,7 +26,7 @@ class DonorController extends Controller
 
     public function create()
     {
-        return view('donors.create');
+        return view('donors.form');
     }
 
     public function store(StoreDonorRequest $request)
@@ -36,9 +36,11 @@ class DonorController extends Controller
         return redirect(route('donors.index'));
     }
 
-    public function edit()
+    public function edit(Donor $donor)
     {
-        dd('edit');
+        return view('donors.form', [
+            'donor' => $donor,
+        ]);
     }
 
     public function update()

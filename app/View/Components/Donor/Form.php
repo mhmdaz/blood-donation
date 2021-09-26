@@ -9,6 +9,8 @@ use Illuminate\View\Component;
 
 class Form extends Component
 {
+    public $donor;
+
     public $blood_groups;
 
     public $districts;
@@ -20,8 +22,10 @@ class Form extends Component
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($donor = null)
     {
+        $this->donor = $donor;
+
         $states = State::all();
 
         $this->districts = District::where('state_id', optional($states->where('name', 'Kerala')->first())->id ?? optional($states->first())->id)

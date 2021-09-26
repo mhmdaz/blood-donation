@@ -6,28 +6,30 @@
     <!-- Validation Errors -->
     <x-auth-validation-errors class="mb-4" :errors="$errors" />
 
-    <form method="POST" action="{{ route('donors.store') }}">
+    <form method="POST" action="{{ ($donor ?? null) ? route('donors.update', $donor) : route('donors.store') }}">
+        @if ($donor ?? null) @method('PUT') @endif
+
         @csrf
 
         <!-- Name -->
         <div>
             <x-label class="required" for="name" :value="__('Name')" />
 
-            <x-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus />
+            <x-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name') ?? optional($donor ?? null)->name" placeholder="Aaron John" required autofocus />
         </div>
 
         <!-- Phone Number -->
         <div class="mt-4">
             <x-label class="required" for="phone" :value="__('Phone Number')" />
 
-            <x-input id="phone" class="block mt-1 w-full" type="text" name="phone" :value="old('phone')" required autofocus />
+            <x-input id="phone" class="block mt-1 w-full" type="text" name="phone" :value="old('phone') ?? optional($donor ?? null)->phone" placeholder="XXX8089XXX" required autofocus />
         </div>
 
         <!-- Email Address -->
         <div class="mt-4">
             <x-label for="email" :value="__('Email')" />
 
-            <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" />
+            <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email') ?? optional($donor ?? null)->email" placeholder="aaron@donate.com" />
         </div>
 
         <!-- Blood Group -->
@@ -36,7 +38,10 @@
 
             <select id="blood_group_id" name="blood_group_id" class="block mt-1 w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" required autofocus>
                 @foreach($blood_groups as $id => $name)
-                    <option value="{{ $id }}">{{ $name }}</option>
+                    <option
+                        value="{{ $id }}"
+                        {{ (old('blood_group_id') ?? optional($donor ?? null)->blood_group_id === $id) ? 'selected' : '' }}
+                    >{{ $name }}</option>
                 @endforeach
             </select>
         </div>
@@ -47,7 +52,10 @@
 
             <select id="state_id" name="state_id" class="block mt-1 w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" required autofocus>
                 @foreach($states as $id => $name)
-                    <option value="{{ $id }}">{{ $name }}</option>
+                    <option
+                        value="{{ $id }}"
+                        {{ (old('state_id') ?? optional($donor ?? null)->state_id === $id) ? 'selected' : '' }}
+                    >{{ $name }}</option>
                 @endforeach
             </select>
         </div>
@@ -58,7 +66,10 @@
 
             <select id="district_id" name="district_id" class="block mt-1 w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" required autofocus>
                 @foreach($districts as $id => $name)
-                    <option value="{{ $id }}">{{ $name }}</option>
+                    <option
+                        value="{{ $id }}"
+                        {{ (old('district_id') ?? optional($donor ?? null)->district_id === $id) ? 'selected' : '' }}
+                    >{{ $name }}</option>
                 @endforeach
             </select>
         </div>
@@ -67,7 +78,7 @@
         <div class="mt-4">
             <x-label for="last_donated_date" :value="__('Last Donated Date')" />
 
-            <x-input id="last_donated_date" class="block mt-1 w-full" type="date" name="last_donated_date" :value="old('last_donated_date')" />
+            <x-input id="last_donated_date" class="block mt-1 w-full" type="date" name="last_donated_date" :value="old('last_donated_date') ?? optional($donor ?? null)->last_donated_date" />
         </div>
 
         <div class="flex items-center justify-end mt-4">
