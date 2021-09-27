@@ -3,6 +3,7 @@
 use App\Http\Controllers\DonorController;
 use App\Http\Controllers\DonorDatatable;
 use App\Http\Controllers\UpdateDonatedDate;
+use App\Http\Controllers\UpdateDonorStatus;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -37,5 +38,6 @@ Route::get('/dashboard', function () {
 require __DIR__.'/auth.php';
 
 Route::any('/donors/datatable/{status?}', DonorDatatable::class)->name('donors.datatable');
+Route::put('/donors/{donor}/status', UpdateDonorStatus::class)->name('donors.status.update');
 
 Route::resource('donors', DonorController::class);

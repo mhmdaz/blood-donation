@@ -38,8 +38,42 @@
         <script type="text/javascript" defer>
             let csrf_token = '{{ csrf_token() }}';
 
+            function updateDonorStatus() {
+                let toggle_button = this;
+
+                let donor_status_update_url = toggle_button.getAttribute('data-update-url');
+
+                let options = {
+                    method: 'PUT',
+
+                    body: JSON.stringify({ status: toggle_button.checked ? 'active' : 'inactive' }),
+
+                    headers: {
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+                        'Content-Type': 'application/json',
+                    }
+                }
+
+                fetch(donor_status_update_url, options)
+                .then(response => response.json())
+                .then(response => {
+                    if ('active' === response.status) {
+                        toggle_button.checked = true;
+                    }
+                    else {
+                        toggle_button.checked = false;
+                    }
+                })
+                .catch(err => console.log(err));
+            }
+
             $(document).ready(function () {
                 $('#donors_table').DataTable({
+                    drawCallback: function (setting) {
+                        document.querySelectorAll('#donors_table .update-status').forEach(update_status_checkbox => {
+                            update_status_checkbox.addEventListener('change', updateDonorStatus);
+                        });
+                    },
                     serverSide: true,
                     ajax: {
                         url: '/donors/datatable',
@@ -54,7 +88,22 @@
                         { data: 'email' },
                         { data: 'district' },
                         { data: 'state' },
-                        { data: 'status' },
+                        {
+                            data: 'status',
+                            render: function (data, type, row) {
+                                let html = '<div class="text-center">';
+
+                                html += `<input type="checkbox" class="update-status" data-update-url="${data.update_url}" value="active" `;
+
+                                if ('active' === data.status) {
+                                    html += 'checked="checked" ';
+                                }
+
+                                html += '/></div>';
+
+                                return html;
+                            }
+                        },
                         { data: 'last_donated_date' },
                         {
                             data: 'actions',

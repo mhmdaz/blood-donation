@@ -49,7 +49,10 @@ class DonorDatatable extends Controller
                 return $obj->state_name;
             })
             ->addColumn('status', function ($obj) {
-                return $obj->status;
+                return [
+                    'status' => $obj->status,
+                    'update_url' => route('donors.status.update', $obj->id),
+                ];
             })
             ->addColumn('actions', function ($obj) {
                 return [
