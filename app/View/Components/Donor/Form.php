@@ -26,9 +26,10 @@ class Form extends Component
     {
         $this->donor = $donor;
 
-        $states = State::all();
+        $states = State::orderBy('name')->get();
 
         $this->districts = District::where('state_id', optional($states->where('name', 'Kerala')->first())->id ?? optional($states->first())->id)
+                                ->orderBy('name')
                                 ->get()
                                 ->pluck('name', 'id');
 
