@@ -3,7 +3,7 @@
     <div class="pt-24">
         <div class="container px-3 mx-auto flex flex-wrap flex-col md:flex-row items-center">
             <!--Left Col-->
-            <div class="flex flex-col w-full md:w-2/5 justify-center items-start text-center md:text-left">
+            <div class="flex flex-col text-white w-full md:w-2/5 justify-center items-start text-center md:text-left">
                 <p class="uppercase tracking-loose w-full">Blood Donate Campaign</p>
                 <h1 class="my-4 text-5xl font-bold leading-tight w-full">
                     Be a Super Hero!
@@ -17,9 +17,10 @@
                     Register
                 </a>
             </div>
+
             <!--Right Col-->
             <div class="w-full md:w-3/5 py-6 text-center">
-                <img class="w-full md:w-4/5 md:mr-0 md:ml-auto z-50" src="/assets/images/hero.svg" />
+                <img class="bg-white border-8 md:ml-auto md:mr-0 md:w-4/5 p-8 rounded-2xl w-full z-50" src="/assets/images/hero.svg" />
             </div>
         </div>
 
